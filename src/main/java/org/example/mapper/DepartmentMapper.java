@@ -1,6 +1,6 @@
-package mapper;
+package org.example.mapper;
 
-import entity.Department;
+import org.example.entity.Department;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;

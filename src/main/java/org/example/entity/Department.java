@@ -1,4 +1,4 @@
-package entity;
+package org.example.entity;
 
 public class Department {
 

@@ -1,5 +1,7 @@
-import entity.Department;
-import mapper.DepartmentMapper;
+package org.example;
+
+import org.example.entity.Department;
+import org.example.mapper.DepartmentMapper;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
