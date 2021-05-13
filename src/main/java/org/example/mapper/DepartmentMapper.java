@@ -10,4 +10,6 @@ public interface DepartmentMapper {
 
     @Select("SELECT VERSION()")
     public String getMySQLVersion();
+
+    Department get(String id);
 }

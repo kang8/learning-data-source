@@ -4,3 +4,5 @@ spring:
     username: root
     password: asdf;lkj
 #    drive-class-name: com.mysql.cj.jdbc.Deiver
+mybatis:
+  mapper-locations: classpath:mapper/*.xml

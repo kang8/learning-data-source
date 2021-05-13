@@ -7,4 +7,8 @@
     <select id="findAll" resultType="org.example.entity.Department">
         select * from tbl_department
     </select>
+    <select id="get" resultType="org.example.entity.Department">
+        select * from tbl_department
+        where id = #{id}
+    </select>
 </mapper>
