@@ -8,8 +8,5 @@ import java.util.List;
 public interface DepartmentMapper {
     List<Department> findAll();
 
-    @Select("SELECT VERSION()")
-    public String getMySQLVersion();
-
     Department get(String id);
 }

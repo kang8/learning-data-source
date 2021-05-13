@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.common.DataSource;
 import org.example.entity.Department;
 import org.example.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,4 +18,17 @@ public class DepartmentController {
     public Department get(@PathVariable String id) {
         return departmentService.get(id);
     }
+
+    @GetMapping("/master/department/{id}")
+    @DataSource("master")
+    public Department getDepartmentByMaster(@PathVariable String id) {
+        return departmentService.get(id);
+    }
+
+    @GetMapping("/slave/department/{id}")
+    @DataSource("slave")
+    public Department getDepartmentBySlave(@PathVariable String id) {
+        return departmentService.get(id);
+    }
+
 }
