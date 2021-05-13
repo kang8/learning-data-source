@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 
 @Configuration
-public class DataSourceConfig {
+public class MybatisConfig {
     @Autowired
     private Environment env;
 
