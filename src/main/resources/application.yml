@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: jdbc:mysql://121.36.19.76:3306/mybatis?serverTimezone=GMT
+    username: root
+    password: asdf;lkj
+#    drive-class-name: com.mysql.cj.jdbc.Deiver
