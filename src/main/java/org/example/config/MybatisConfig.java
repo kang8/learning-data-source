@@ -48,8 +48,8 @@ public class MybatisConfig {
         dataSourceMap.put("slave", slave());
 
         DynamicDataSource dynamicDataSource = new DynamicDataSource();
-        dynamicDataSource.setDefaultDataSource(master());
-        dynamicDataSource.setDataSource(dataSourceMap);
+        dynamicDataSource.setDefaultTargetDataSource(master());
+        dynamicDataSource.setTargetDataSources(dataSourceMap);
         return dynamicDataSource;
     }
 

@@ -10,11 +10,13 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
         return DynamicDataSourceContextHolder.getDataSourceKey();
     }
 
-    public void setDefaultDataSource(Object defaultDataSource) {
+    @Override
+    public void setDefaultTargetDataSource(Object defaultDataSource) {
         super.setDefaultTargetDataSource(defaultDataSource);
     }
 
-    public void setDataSource(Map<Object, Object> dataSources) {
+    @Override
+    public void setTargetDataSources(Map<Object, Object> dataSources) {
         super.setTargetDataSources(dataSources);
         DynamicDataSourceContextHolder.addDataSourceKeys(dataSources.keySet());
     }
