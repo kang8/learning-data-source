@@ -33,4 +33,9 @@ class DepartmentTest {
         departmentList.forEach(System.out::println);
     }
 
+    @Test
+    void testGetMySALVerSION() {
+        String mySQLVersion = departmentMapper.getMySQLVersion();
+        assertEquals("8.0.23", mySQLVersion);
+    }
 }
