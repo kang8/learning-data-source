@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,14 +41,24 @@ class DepartmentTest {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(resource);
 
         sqlSession = sqlSessionFactory.openSession();
-//        departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
     }
 
     @Test
     void testFindAll() {
+        // give. 前置条件
         DepartmentMapper departmentMapper = sqlSession.getMapper(DepartmentMapper.class);
+
+        List<Department> expectedDepartmentList = new ArrayList<>();
+        expectedDepartmentList.add(new Department("1", "全部部门", "-"));
+        expectedDepartmentList.add(new Department("2", "开发部", "123"));
+        expectedDepartmentList.add(new Department("3", "测试产品部", "789"));
+        expectedDepartmentList.add(new Department("4", "运维部", "456"));
+
+        // when. 对应执行
         List<Department> departmentList = departmentMapper.findAll();
-        departmentList.forEach(System.out::println);
+
+        // then. 对应断言
+        assertEquals(expectedDepartmentList, departmentList);
     }
 
     @Test
