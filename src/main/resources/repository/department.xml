@@ -6,34 +6,34 @@
     <insert id="insert">
         <choose>
             <when test="id == null">
-                INSERT INTO tbl_department(name, tel)
+                INSERT INTO department(name, tel)
                 VALUES (#{name}, #{tel})
             </when>
             <otherwise>
-                INSERT INTO tbl_department(id, name, tel)
+                INSERT INTO department(id, name, tel)
                 VALUES (#{id}, #{name}, #{tel})
             </otherwise>
         </choose>
     </insert>
 
     <update id="update">
-        UPDATE tbl_department
+        UPDATE department
         SET name = #{name}, tel = #{tel}
         WHERE id = #{id}
     </update>
 
     <delete id="delete">
-        DELETE FROM tbl_department
+        DELETE FROM department
         WHERE id = #{id}
     </delete>
 
     <select id="findAll" resultType="org.example.entity.Department">
-        select * from tbl_department
+        select * from department
     </select>
 
     <select id="findById" resultType="org.example.entity.Department">
         SELECT *
-        FROM tbl_department
+        FROM department
         WHERE id = #{id}
     </select>
 </mapper>
