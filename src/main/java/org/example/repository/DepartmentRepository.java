@@ -12,4 +12,10 @@ public interface DepartmentRepository {
     public String getMySQLVersion();
 
     Department findById(Long id);
+
+    int insert(Department department);
+
+    int update(Department department);
+
+    int delete(Long id);
 }

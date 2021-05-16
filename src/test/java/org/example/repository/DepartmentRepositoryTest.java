@@ -69,12 +69,15 @@ class DepartmentRepositoryTest {
 
     @Test
     void findById() {
+        // give
         DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
 
         Department departmentByI = new Department(1L, "全部部门", "-");
 
+        // when
         Department departmentByQuery = departmentRepository.findById(1L);
 
+        // then
         assertEquals(departmentByI, departmentByQuery);
     }
 
