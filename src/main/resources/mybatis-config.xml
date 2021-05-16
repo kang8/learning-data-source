@@ -20,6 +20,6 @@
     </environments>
 
     <mappers>
-        <mapper resource="mapper/department.xml"/>
+        <mapper resource="repository/department.xml"/>
     </mappers>
 </configuration>

@@ -2,9 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.mapper.DepartmentMapper">
+<mapper namespace="org.example.repository.DepartmentRepository">
 
     <select id="findAll" resultType="org.example.entity.Department">
         select * from tbl_department
+    </select>
+
+    <select id="findById" resultType="org.example.entity.Department">
+        SELECT *
+        FROM tbl_department
+        WHERE id = #{id}
     </select>
 </mapper>

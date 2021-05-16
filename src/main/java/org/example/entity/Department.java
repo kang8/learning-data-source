@@ -4,17 +4,17 @@ import java.util.Objects;
 
 public class Department {
 
-    private String id;
+    private Long id;
 
     private String name;
 
     private String tel;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -43,7 +43,7 @@ public class Department {
                 '}';
     }
 
-    public Department(String id, String name, String tel) {
+    public Department(Long id, String name, String tel) {
         this.id = id;
         this.name = name;
         this.tel = tel;
