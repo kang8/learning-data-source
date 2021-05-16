@@ -43,7 +43,7 @@ class DepartmentRepositoryTest {
     }
 
     @Test
-    void testFindAll() {
+    void findAll() {
         // give. 前置条件
         DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
 
@@ -61,7 +61,7 @@ class DepartmentRepositoryTest {
     }
 
     @Test
-    void testGetMySALVerSION() {
+    void getMySQLVersion() {
         DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
         String mySQLVersion = departmentRepository.getMySQLVersion();
         assertEquals("8.0.23", mySQLVersion);
@@ -86,5 +86,53 @@ class DepartmentRepositoryTest {
         if (sqlSession != null) {
             sqlSession.close();
         }
+    }
+
+    @Test
+    void insert() {
+        // give
+        DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
+        Department addDepartment = new Department(null, "售前部", "321456");
+
+        // when
+        int insert = departmentRepository.insert(addDepartment);
+
+        // then
+        assertEquals(1, insert);
+
+        // clean
+        departmentRepository.delete(5L);
+    }
+
+    @Test
+    void update() {
+        // give
+        DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
+
+        Department updateDepartment = new Department(1L, "全部部门", "18812344321");
+
+        // when
+        int update = departmentRepository.update(updateDepartment);
+
+        // then
+        assertEquals(1, update);
+
+        // clean
+        departmentRepository.update(new Department(1L, "全部部门", "-"));
+    }
+
+    @Test
+    void delete() {
+        // give
+        DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
+
+        // when
+        int delete = departmentRepository.delete(1L);
+
+        // then
+        assertEquals(1, delete);
+
+        // clean
+        departmentRepository.insert(new Department(1L, "全部部门", "-"));
     }
 }
