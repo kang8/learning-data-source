@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class User {
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -14,11 +14,11 @@ public class User {
 
     private Department department;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -51,6 +51,17 @@ public class User {
     }
 
     public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public User() {
+    }
+
+    public User(Long id, String name, Integer age, LocalDateTime birthday, Department department) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.birthday = birthday;
         this.department = department;
     }
 

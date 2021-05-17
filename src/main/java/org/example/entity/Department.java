@@ -43,6 +43,9 @@ public class Department {
                 '}';
     }
 
+    public Department() {
+    }
+
     public Department(Long id, String name, String tel) {
         this.id = id;
         this.name = name;

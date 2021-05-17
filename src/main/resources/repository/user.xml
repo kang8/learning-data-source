@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.repository.UserRepository">
+
+    <resultMap id="userMap" type="org.example.entity.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="birthday" column="birthday"/>
+        <association property="department" javaType="org.example.entity.Department">
+            <id property="id" column="department_id"/>
+            <result property="name" column="department_name"/>
+        </association>
+    </resultMap>
+
+    <resultMap id="userLazy" type="org.example.entity.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="birthday" column="birthday"/>
+        <association property="department" javaType="org.example.entity.Department"
+                     select="org.example.repository.DepartmentRepository.findById"
+                     column="department_id"/>
+    </resultMap>
+
+    <insert id="insert">
+        <choose>
+            <when test="id == null">
+                INSERT INTO user(name, age, birthday, department_id)
+                VALUES (#{name}, #{age}, #{birthday}, #{department_id})
+            </when>
+            <otherwise>
+                INSERT INTO user(id, name, age, birthday, department_id)
+                VALUES (#{id}, er{name}, #{age}, #{birthday}, #{department_id})
+            </otherwise>
+        </choose>
+    </insert>
+
+    <update id="update">
+        UPDATE user
+        SET
+        name = #{name},
+        age = #{age},
+        birthday = #{birthday},
+        department_id = #{departmentId}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+
+    <select id="findAll" resultMap="userMap">
+        SELECT user.*, department.name AS department_name
+        FROM user
+        LEFT JOIN department on user.department_id = department.id
+    </select>
+
+    <select id="findById" resultType="org.example.entity.User">
+        SELECT user.*, department.name AS department_name, department.tel
+        FROM user
+        LEFT JOIN department on user.department = department.id
+        WHERE user.id = #{id}
+    </select>
+
+</mapper>

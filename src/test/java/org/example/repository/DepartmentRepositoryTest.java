@@ -81,13 +81,6 @@ class DepartmentRepositoryTest {
         assertEquals(departmentByI, departmentByQuery);
     }
 
-    @AfterAll
-    static void afterAll() {
-        if (sqlSession != null) {
-            sqlSession.close();
-        }
-    }
-
     @Test
     void insert() {
         // give
@@ -134,5 +127,12 @@ class DepartmentRepositoryTest {
 
         // clean
         departmentRepository.insert(new Department(1L, "全部部门", "-"));
+    }
+
+    @AfterAll
+    static void afterAll() {
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
     }
 }
