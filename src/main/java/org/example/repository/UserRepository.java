@@ -8,6 +8,8 @@ public interface UserRepository {
 
     List<User> findAll();
 
+    List<User> findAllLazy();
+
     User findById(Long id);
 
     int insert(User department);

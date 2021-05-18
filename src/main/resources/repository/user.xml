@@ -79,4 +79,9 @@
         WHERE user.id = #{id}
     </select>
 
+    <select id="findAllLazy" resultMap="userLazy">
+        SELECT *
+        FROM user
+    </select>
+
 </mapper>

@@ -46,6 +46,25 @@ class UserRepositoryTest {
 
 
     @Test
+    void findAllLazy() {
+        // give
+        UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
+
+        ArrayList<Object> expectUserList = new ArrayList<>();
+        expectUserList.add(new User(1L, "阿熊", 18, LocalDateTime.parse("2003-08-08T10:00:00"),
+                new Department(2L, "开发部", "123")));
+        expectUserList.add(new User(2L, "老狗", 30, LocalDateTime.parse("1991-02-20T15:27:20"),
+                new Department(4L, "运维部", "456")));
+
+        // when
+        List<User> userList = userRepository.findAllLazy();
+        userList.forEach(System.out::println);
+
+        // then
+        assertEquals(expectUserList, userList);
+    }
+
+    @Test
     void findAll() {
         // give
         UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
