@@ -13,6 +13,8 @@ public interface DepartmentRepository {
 
     Department findById(Long id);
 
+    Department findByIdUseAssociationQuery(Long id);
+
     int insert(Department department);
 
     int update(Department department);

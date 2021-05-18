@@ -58,7 +58,6 @@ class UserRepositoryTest {
 
         // when
         List<User> userList = userRepository.findAllLazy();
-        userList.forEach(System.out::println);
 
         // then
         assertEquals(expectUserList, userList);

@@ -84,4 +84,10 @@
         FROM user
     </select>
 
+    <select id="findAllElementByDepartmentId" resultType="org.example.entity.User">
+        SELECT *
+        FROM user
+        WHERE department_id = #{departmentId}
+    </select>
+
 </mapper>

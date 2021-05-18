@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.example.entity.Department;
+import org.example.entity.User;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,8 +13,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -48,10 +51,16 @@ class DepartmentRepositoryTest {
         DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
 
         List<Department> expectedDepartmentList = new ArrayList<>();
-        expectedDepartmentList.add(new Department(1L, "全部部门", "-"));
-        expectedDepartmentList.add(new Department(2L, "开发部", "123"));
-        expectedDepartmentList.add(new Department(3L, "测试产品部", "789"));
-        expectedDepartmentList.add(new Department(4L, "运维部", "456"));
+        expectedDepartmentList.add(new Department(1L, "全部部门", "-", Set.of()));
+        expectedDepartmentList.add(new Department(2L, "开发部", "123", Set.of(
+                new User(1L, "阿熊", 18,
+                        LocalDateTime.parse("2003-08-08T10:00:00"), null)
+        )));
+        expectedDepartmentList.add(new Department(3L, "测试产品部", "789", Set.of()));
+        expectedDepartmentList.add(new Department(4L, "运维部", "456", Set.of(
+                new User(2L, "老狗", 30,
+                        LocalDateTime.parse("1991-02-20T15:27:20"), null)
+        )));
 
         // when. 对应执行
         List<Department> departmentList = departmentRepository.findAll();
@@ -65,6 +74,21 @@ class DepartmentRepositoryTest {
         DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
         String mySQLVersion = departmentRepository.getMySQLVersion();
         assertEquals("8.0.23", mySQLVersion);
+    }
+
+    @Test
+    void findByIdUseAssociationQuery() {
+        // give
+        DepartmentRepository departmentRepository = sqlSession.getMapper(DepartmentRepository.class);
+
+        Department departmentById = new Department(2L, "开发部", "123", Set.of(new User(1L, "阿熊", 18,
+                LocalDateTime.parse("2003-08-08T10:00:00"), null)));
+
+        // when
+        Department departmentByQuery = departmentRepository.findByIdUseAssociationQuery(2L);
+
+        // then
+        assertEquals(departmentById, departmentByQuery);
     }
 
     @Test
