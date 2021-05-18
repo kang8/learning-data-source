@@ -25,15 +25,28 @@
                      column="department_id"/>
     </resultMap>
 
+    <resultMap id="user" type="org.example.entity.User">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="birthday" column="birthday"/>
+        <association property="department" javaType="org.example.entity.Department"
+                     column="department_id">
+            <id property="id" column="department_id"/>
+            <result property="name" column="department_name"/>
+            <result property="tel" column="tel"/>
+        </association>
+    </resultMap>
+
     <insert id="insert">
         <choose>
             <when test="id == null">
                 INSERT INTO user(name, age, birthday, department_id)
-                VALUES (#{name}, #{age}, #{birthday}, #{department_id})
+                VALUES (#{name}, #{age}, #{birthday}, #{department.id})
             </when>
             <otherwise>
                 INSERT INTO user(id, name, age, birthday, department_id)
-                VALUES (#{id}, er{name}, #{age}, #{birthday}, #{department_id})
+                VALUES (#{id}, #{name}, #{age}, #{birthday}, #{department.id})
             </otherwise>
         </choose>
     </insert>
@@ -44,7 +57,7 @@
         name = #{name},
         age = #{age},
         birthday = #{birthday},
-        department_id = #{departmentId}
+        department_id = #{department.id}
         WHERE id = #{id}
     </update>
 
@@ -59,10 +72,10 @@
         LEFT JOIN department on user.department_id = department.id
     </select>
 
-    <select id="findById" resultType="org.example.entity.User">
+    <select id="findById" resultMap="user">
         SELECT user.*, department.name AS department_name, department.tel
         FROM user
-        LEFT JOIN department on user.department = department.id
+        LEFT JOIN department on user.department_id = department.id
         WHERE user.id = #{id}
     </select>
 

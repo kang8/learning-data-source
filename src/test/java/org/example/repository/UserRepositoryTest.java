@@ -66,18 +66,71 @@ class UserRepositoryTest {
 
     @Test
     void findById() {
+        // give
+        UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
+
+        User expectUser = new User(1L, "阿熊", 18, LocalDateTime.parse("2003-08-08T10:00:00"),
+                new Department(2L, "开发部", "123"));
+
+        // when
+        User user = userRepository.findById(1L);
+
+        // then
+        assertEquals(expectUser, user);
     }
 
     @Test
     void insert() {
+        // give
+        UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
+
+        User user = new User(null, "飞机", 33, LocalDateTime.parse("2020-01-23T11:45:23"),
+                new Department(2L, null, null));
+
+        // when
+        int insertBackValue = userRepository.insert(user);
+
+        // then
+        assertEquals(1, insertBackValue);
+
+        // clean
+        userRepository.delete(3L);
     }
 
     @Test
     void update() {
+        // give
+        UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
+        User user = new User(1L, "飞机", 33, LocalDateTime.parse("2020-01-23T11:45:23"),
+                new Department(3L, null, null));
+
+        // when
+        int updateBackValue = userRepository.update(user);
+
+        // then
+        assertEquals(1, updateBackValue);
+
+        //clean
+        userRepository.update(
+                new User(1L, "阿熊", 18, LocalDateTime.parse("2003-08-08T10:00:00"),
+                        new Department(2L, null, null)));
     }
 
     @Test
     void delete() {
+        // give
+        UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
+
+        // when
+        int deleteBackValue = userRepository.delete(1L);
+
+        // then
+        assertEquals(1, deleteBackValue);
+
+        // clean
+        userRepository.insert(
+                new User(1L, "阿熊", 18, LocalDateTime.parse("2003-08-08T10:00:00"),
+                        new Department(2L, null, null)));
     }
 
     @AfterAll
