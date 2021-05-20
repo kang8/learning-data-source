@@ -5,10 +5,10 @@ logging:
         mapper: debug
 datasource:
   master:
-    url: jdbc:mysql://121.36.19.76:3306/mybatis?serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/mybatis?serverTimezone=GMT
     username: root
-    password: asdf;lkj
+    password: root
   slave:
-    url: jdbc:mysql://121.36.19.76:3306/test?serverTimezone=GMT
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=GMT
     username: root
-    password: asdf;lkj
+    password: root
