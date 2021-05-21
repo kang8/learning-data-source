@@ -76,7 +76,6 @@ class UserRepositoryTest {
 
         // when
         List<User> userList = userRepository.findAll();
-        userList.forEach(System.out::println);
 
         // then
         assertEquals(expectUserList, userList);
@@ -102,7 +101,7 @@ class UserRepositoryTest {
         // give
         UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
 
-        User user = new User(null, "飞机", 33, LocalDateTime.parse("2020-01-23T11:45:23"),
+        User user = new User(3L, "飞机", 33, LocalDateTime.parse("2020-01-23T11:45:23"),
                 new Department(2L, null, null));
 
         // when
@@ -113,6 +112,25 @@ class UserRepositoryTest {
 
         // clean
         userRepository.delete(3L);
+    }
+
+    @Test
+    void testObjectFactorySetDefaultValue() {
+        // give
+        UserRepository userRepository = sqlSession.getMapper(UserRepository.class);
+
+        User user = new User(4L, "飞机", null, LocalDateTime.parse("2020-01-23T11:45:23"),
+                new Department(2L, null, null));
+
+        // when
+        int insertBackValue = userRepository.insert(user);
+        User userForInsert = userRepository.findById(4L);
+
+        // then
+        assertEquals(0, userForInsert.getAge());
+
+        // clean
+        userRepository.delete(4L);
     }
 
     @Test
